@@ -2,5 +2,8 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/eslint-module', "@nuxt/eslint"]
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/eslint-module', "@nuxt/eslint", 'nuxt-headlessui'],
+  headlessui: {
+        prefix: 'Headless'
+    }
 })

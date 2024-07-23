@@ -8,9 +8,18 @@ importers:
 
   .:
     dependencies:
+      '@heroicons/vue':
+        specifier: ^2.1.5
+        version: 2.1.5(vue@3.4.31(typescript@5.5.3))
       '@nuxt/eslint':
         specifier: ^0.3.13
         version: 0.3.13(eslint-webpack-plugin@4.2.0(eslint@9.7.0)(webpack@5.93.0(esbuild@0.21.5)))(eslint@9.7.0)(magicast@0.3.4)(rollup@4.18.1)(typescript@5.5.3)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))
+      '@tailwindcss/aspect-ratio':
+        specifier: ^0.4.2
+        version: 0.4.2(tailwindcss@3.4.6)
+      '@tailwindcss/forms':
+        specifier: ^0.5.7
+        version: 0.5.7(tailwindcss@3.4.6)
       nuxt:
         specifier: ^3.12.3
         version: 3.12.3(@parcel/watcher@2.4.1)(@types/node@20.14.11)(eslint@9.7.0)(ioredis@5.4.1)(magicast@0.3.4)(optionator@0.9.4)(rollup@4.18.1)(terser@5.31.3)(typescript@5.5.3)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3))
@@ -33,6 +42,9 @@ importers:
       eslint:
         specifier: ^9.7.0
         version: 9.7.0
+      nuxt-headlessui:
+        specifier: ^1.2.0
+        version: 1.2.0(magicast@0.3.4)(rollup@4.18.1)(vue@3.4.31(typescript@5.5.3))
       typescript:
         specifier: ^5.5.3
         version: 5.5.3
@@ -698,6 +710,17 @@ packages:
     resolution: {integrity: sha512-vBZP4NlzfOlerQTnba4aqZoMhE/a9HY7HRqoOPaETQcSQuWEIyZMHGfVu6w9wGtGK5fED5qRs2DteVCjOH60sA==}
     engines: {node: '>=14'}
 
+  '@headlessui/vue@1.7.22':
+    resolution: {integrity: sha512-Hoffjoolq1rY+LOfJ+B/OvkhuBXXBFgd8oBlN+l1TApma2dB0En0ucFZrwQtb33SmcCqd32EQd0y07oziXWNYg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      vue: ^3.2.0
+
+  '@heroicons/vue@2.1.5':
+    resolution: {integrity: sha512-IpqR72sFqFs55kyKfFS7tN+Ww6odFNeH/7UxycIOrlVYfj4WUGAdzQtLBnJspucSeqWFQsKM0g0YrgU655BEfA==}
+    peerDependencies:
+      vue: '>= 3'
+
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
     engines: {node: '>=12.22'}
@@ -1136,6 +1159,24 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     peerDependencies:
       eslint: '>=8.40.0'
+
+  '@tailwindcss/aspect-ratio@0.4.2':
+    resolution: {integrity: sha512-8QPrypskfBa7QIMuKHg2TA7BqES6vhBrDLOv8Unb6FcFyd3TjKbc6lcmb9UPQHxfl24sXoJ41ux/H7qQQvfaSQ==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+
+  '@tailwindcss/forms@0.5.7':
+    resolution: {integrity: sha512-QE7X69iQI+ZXwldE+rzasvbJiyV/ju1FGHH0Qn2W3FKbuYtqp8LKcy6iSw79fVUT5/Vvf+0XgLCeYVG+UV6hOw==}
+    peerDependencies:
+      tailwindcss: '>=3.0.0 || >= 3.0.0-alpha.1'
+
+  '@tanstack/virtual-core@3.8.3':
+    resolution: {integrity: sha512-vd2A2TnM5lbnWZnHi9B+L2gPtkSeOtJOAw358JqokIH1+v2J7vUAzFVPwB/wrye12RFOurffXu33plm4uQ+JBQ==}
+
+  '@tanstack/vue-virtual@3.8.3':
+    resolution: {integrity: sha512-xrFLkOiqLoGwohgr1+Q880hkNdQWqwi19EXzx38iAjVEm1Db3KIAV0aVP57/dnNXU3NO1Vx8wnIHII5J4n1LyA==}
+    peerDependencies:
+      vue: ^2.7.0 || ^3.0.0
 
   '@trysound/sax@0.2.0':
     resolution: {integrity: sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==}
@@ -2897,6 +2938,10 @@ packages:
     resolution: {integrity: sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg==}
     engines: {node: '>=4'}
 
+  mini-svg-data-uri@1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
+
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
 
@@ -3053,6 +3098,9 @@ packages:
     resolution: {integrity: sha512-6vRdiXTw9SajEQOUi6Ze/XaIXzy1q/sD5UqHQSv3yqTu7Pot5S7fEihNXV8LpcgLz+9HzjVt70r7jYe7R99c2w==}
     engines: {node: ^16.10.0 || >=18.0.0}
     hasBin: true
+
+  nuxt-headlessui@1.2.0:
+    resolution: {integrity: sha512-eidWwA4SFLWFk2KcGMHlrPTJb+ODEt5Bsj6cXjmhDtRYydqvgYXHU1U7563E6/qMuayThumbGUopF1IRqlYHwA==}
 
   nuxt@3.12.3:
     resolution: {integrity: sha512-Qdkc+ucWwFcKsiL/OTF87jbgyFSymwPRKiiu0mvzsd/RXTn4hGiBduAlF3f7Yy0F9pDjSj8XHKDSnHYsDzm6rA==}
@@ -4922,6 +4970,15 @@ snapshots:
 
   '@fastify/busboy@2.1.1': {}
 
+  '@headlessui/vue@1.7.22(vue@3.4.31(typescript@5.5.3))':
+    dependencies:
+      '@tanstack/vue-virtual': 3.8.3(vue@3.4.31(typescript@5.5.3))
+      vue: 3.4.31(typescript@5.5.3)
+
+  '@heroicons/vue@2.1.5(vue@3.4.31(typescript@5.5.3))':
+    dependencies:
+      vue: 3.4.31(typescript@5.5.3)
+
   '@humanwhocodes/module-importer@1.0.1': {}
 
   '@humanwhocodes/retry@0.3.0': {}
@@ -5564,6 +5621,22 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
+
+  '@tailwindcss/aspect-ratio@0.4.2(tailwindcss@3.4.6)':
+    dependencies:
+      tailwindcss: 3.4.6
+
+  '@tailwindcss/forms@0.5.7(tailwindcss@3.4.6)':
+    dependencies:
+      mini-svg-data-uri: 1.4.4
+      tailwindcss: 3.4.6
+
+  '@tanstack/virtual-core@3.8.3': {}
+
+  '@tanstack/vue-virtual@3.8.3(vue@3.4.31(typescript@5.5.3))':
+    dependencies:
+      '@tanstack/virtual-core': 3.8.3
+      vue: 3.4.31(typescript@5.5.3)
 
   '@trysound/sax@0.2.0': {}
 
@@ -7568,6 +7641,8 @@ snapshots:
 
   min-indent@1.0.1: {}
 
+  mini-svg-data-uri@1.4.4: {}
+
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.11
@@ -7776,6 +7851,17 @@ snapshots:
   nuxi@3.12.0:
     optionalDependencies:
       fsevents: 2.3.3
+
+  nuxt-headlessui@1.2.0(magicast@0.3.4)(rollup@4.18.1)(vue@3.4.31(typescript@5.5.3)):
+    dependencies:
+      '@headlessui/vue': 1.7.22(vue@3.4.31(typescript@5.5.3))
+      '@nuxt/kit': 3.12.3(magicast@0.3.4)(rollup@4.18.1)
+      pathe: 1.1.2
+    transitivePeerDependencies:
+      - magicast
+      - rollup
+      - supports-color
+      - vue
 
   nuxt@3.12.3(@parcel/watcher@2.4.1)(@types/node@20.14.11)(eslint@9.7.0)(ioredis@5.4.1)(magicast@0.3.4)(optionator@0.9.4)(rollup@4.18.1)(terser@5.31.3)(typescript@5.5.3)(vite@5.3.4(@types/node@20.14.11)(terser@5.31.3)):
     dependencies:
