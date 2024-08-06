@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import SearchInput from "../SearchInput"
-import SeachResult from "../SearchResult"
+import { ref } from "vue";
+import SearchCard from "../SearchCard"
 
 interface Doctor {
   id: number;
@@ -16,14 +15,6 @@ interface Doctor {
   href: string;
 }
 
-const navigation = [
-  { name: "Services", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Faq", href: "#" },
-  { name: "Contact", href: "#" },
-];
-
-const searchQuery = ref("");
 const doctors = ref<Doctor[]>([
   {
     id: 1,
@@ -64,30 +55,28 @@ const doctors = ref<Doctor[]>([
   // More doctors...
 ]);
 
-const filteredDoctors = computed(() =>
-  doctors.value.filter(
-    (doctor) =>
-      doctor.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
-      doctor.specialty
-        .toLowerCase()
-        .includes(searchQuery.value.toLowerCase()) ||
-      doctor.location.toLowerCase().includes(searchQuery.value.toLowerCase())
-  )
-);
 </script>
 
 <template>
-  <div class="bg-gray-900 min-h-screen">
-
-    <!-- Search Input -->
-    <SearchInput/>
-
-    <!-- Search Results -->
-    <SeachResult/>
-
-    <!-- Footer -->
-    <footer class="relative bg-gray-900">
-      <!-- Include your footer code here -->
-    </footer>
-  </div>
+  <!-- Search Results -->
+  <section>
+    <div class="bg-white py-12">
+      <div class="max-w-7xl mx-auto px-6 lg:px-8">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900">
+          Resultados de Búsqueda
+        </h2>
+        <div class="mt-8 grid gap-8 lg:grid-cols-3">
+          <div
+            v-for="doctor in doctors"
+            :key="doctor.id"
+            class="bg-white shadow-lg rounded-lg overflow-hidden"
+          >
+            <SearchCard :doctor="doctor"></SearchCard>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
+
+<style scoped></style>
