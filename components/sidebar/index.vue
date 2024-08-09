@@ -80,6 +80,7 @@ const sidebarOpen = ref(false);
 </script>
 <template>
   <div>
+    <!-- Sidebar -->
     <TransitionRoot as="template" :show="sidebarOpen">
       <Dialog class="relative z-50 lg:hidden" @close="sidebarOpen = false">
         <TransitionChild
@@ -306,8 +307,10 @@ const sidebarOpen = ref(false);
         </nav>
       </div>
     </div>
+    <!-- /.Sidebar -->
 
     <div class="lg:pl-72">
+      <!-- Top Bar -->
       <div class="sticky top-0 z-40 lg:mx-auto lg:max-w-7xl lg:px-8">
         <div
           class="flex h-16 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0 lg:shadow-none"
@@ -407,12 +410,14 @@ const sidebarOpen = ref(false);
           </div>
         </div>
       </div>
-
+      <!-- /.Top Bar -->
+      <!-- Page Content -->
       <main class="py-10">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <slot />
         </div>
       </main>
+      <!-- Page Content -->
     </div>
   </div>
 </template>
