@@ -6,6 +6,7 @@
   <div class="bg-white">
     <!-- Header -->
     <HeaderLanding/>
+    
     <main>
       <!-- Hero section -->
       <LandingHero/>
