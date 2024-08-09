@@ -5,8 +5,7 @@
 <template>
   <div class="bg-white">
     <!-- Header -->
-    <HeaderLanding/>
-    
+    <LandingHeader/>
     <main>
       <!-- Hero section -->
       <LandingHero/>
@@ -21,6 +20,6 @@
     </main>
 
     <!-- Footer -->
-    <FooterLanding/>
+    <LandingFooter/>
   </div>
 </template>
