@@ -43,24 +43,18 @@ definePageMeta({
 <template>
   <div class="bg-white">
     <div class="py-16 sm:py-24">
-      <div class="mx-auto max-w-7xl sm:px-2 lg:px-8">
-        <div class="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
-          <h1
-            class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
-          >
-            My Doctors
-          </h1>
-          <p class="mt-2 text-sm text-gray-500">
-            Manage and view details of your doctors. You can see their
-            specialties and contact information here.
-          </p>
-        </div>
-      </div>
+      <!-- PageTitle -->
+      <PageTitle 
+        title="My Doctors" 
+        description="Manage and view details of your doctors. You can see their specialties and contact information here."
+      />
+      <!-- /.PageTitle -->
 
       <div class="mt-16">
         <h2 class="sr-only">Doctors List</h2>
         <div class="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div class="mx-auto max-w-2xl space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
+            <!-- DoctorInfo -->
             <div
               v-for="doctor in doctors"
               :key="doctor.id"
@@ -143,6 +137,7 @@ definePageMeta({
                 </div>
               </div>
             </div>
+            <!-- /.DoctorInfo -->
           </div>
         </div>
       </div>
