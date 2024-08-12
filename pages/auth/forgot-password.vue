@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import AuthHeader from "@/components/AuthHeader/index.vue";
-import AuthForgotPasswordForm from "@/components/AuthForgotPasswordForm/index.vue";
+  async function forgotPassword(response:forgotPasswordResponse) {
+    console.log("forgot-password-data", response);
+    
+  }
 </script>
 
 <template>
@@ -12,7 +14,7 @@ import AuthForgotPasswordForm from "@/components/AuthForgotPasswordForm/index.vu
     <!-- /.AuthHeader-->
 
     <!-- AuthForgotPasswordForm -->
-    <AuthForgotPasswordForm />
+    <AuthForgotPasswordForm @forgot-password="forgotPassword" />
     <!-- /.AuthForgotPasswordForm -->
   </div>
 </template>
