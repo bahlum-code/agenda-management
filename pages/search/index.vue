@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import SearchInput from "../SearchInput"
-import SeachResult from "../SearchResult"
+import SearchInput from "@/components/SearchInput/index.vue"
+import SearchResult from "@/components/SearchResult/index.vue"
 
 interface Doctor {
   id: number;
@@ -83,7 +83,7 @@ const filteredDoctors = computed(() =>
     <SearchInput/>
 
     <!-- Search Results -->
-    <SeachResult/>
+    <SearchResult/>
 
     <!-- Footer -->
     <footer class="relative bg-gray-900">

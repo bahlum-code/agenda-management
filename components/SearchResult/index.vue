@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import SearchCard from "../SearchCard"
+import SearchCard from "../SearchCard/index.vue"
 
 interface Doctor {
   id: number;
