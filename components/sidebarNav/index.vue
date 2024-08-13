@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
-import sidebarNavItems from "~/components/sidebarNavItems/index.vue";
-import sidebarNavItemsMobile from "~/components/sidebarNavItemsMobile/index.vue";
+import sidebarNavItems from "~/components/SidebarNavItems/index.vue";
+import sidebarNavItemsMobile from "~/components/SidebarNavItemsMobile/index.vue";
 
 import {
   CalendarIcon,

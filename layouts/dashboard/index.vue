@@ -1,6 +1,6 @@
 <script setup>
-import SidebarNav from "~/components/sidebarNav/index.vue";
-import TopBar from "~/components/topBar/index.vue";
+import SidebarNav from "~/components/SidebarNav/index.vue";
+import TopBar from "~/components/TopBar/index.vue";
 
 const userNavigation = [
   { name: "Your profile", href: "/account" },
