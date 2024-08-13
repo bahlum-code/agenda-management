@@ -1,7 +1,4 @@
-<script setup>
-import SidebarNav from "~/components/SidebarNav/index.vue";
-import TopBar from "~/components/TopBar/index.vue";
-
+<script setup lang="ts">
 const userNavigation = [
   { name: "Your profile", href: "/account" },
   { name: "Sign out", href: "/" },
@@ -14,7 +11,7 @@ const userNavigation = [
     <!-- /.Sidebar -->
     <div class="lg:pl-72">
       <!-- Top Bar -->
-      <TopBar :userNavigation="userNavigation" />
+      <TopBar :user-navigation="userNavigation" />
       <!-- /.Top Bar -->
 
       <!-- Page Content -->

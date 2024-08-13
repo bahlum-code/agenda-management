@@ -1,12 +1,14 @@
-<script setup>
+<script setup lang="ts">
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
 import { Bars3Icon, BellIcon } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
 
-const props = defineProps({
-  userNavigation: Array,
-});
+defineProps<{
+  userNavigation: { name: string; href: string }[];
+}>();
+
+const sidebarOpen = ref(false);
 </script>
 
 <template>

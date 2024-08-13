@@ -1,5 +1,4 @@
 <script setup>
-import { ref } from "vue";
 import sidebarNavItems from "~/components/SidebarNavItems/index.vue";
 import sidebarNavItemsMobile from "~/components/SidebarNavItemsMobile/index.vue";
 
