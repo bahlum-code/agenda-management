@@ -5,7 +5,13 @@ export default defineNuxtConfig({
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/eslint-module', "@nuxt/eslint", 'nuxt-headlessui'],
   headlessui: {
     prefix: 'Headless'
-  },
+    },
+  typescript: {
+      typeCheck: false
+    },
+    imports: {
+      dirs: ['./utils/types']
+    },
   vite: {
     server: {
       host: true,
