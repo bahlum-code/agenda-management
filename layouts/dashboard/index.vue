@@ -1,14 +1,20 @@
 <script setup>
-import Sidebar from "~/components/sidebar/index.vue";
+import SidebarNav from "~/components/sidebarNav/index.vue";
+import TopBar from "~/components/topBar/index.vue";
+
+const userNavigation = [
+  { name: "Your profile", href: "/account" },
+  { name: "Sign out", href: "/" },
+];
 </script>
 <template>
   <div>
     <!-- Sidebar -->
-    <Sidebar />
+    <SidebarNav />
     <!-- /.Sidebar -->
     <div class="lg:pl-72">
       <!-- Top Bar -->
-      <div class="sticky top-0 z-40 lg:mx-auto lg:max-w-7xl lg:px-8" />
+      <TopBar :userNavigation="userNavigation" />
       <!-- /.Top Bar -->
 
       <!-- Page Content -->
