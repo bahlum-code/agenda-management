@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/eslint-module', "@nuxt/eslint", 'nuxt-headlessui'],
   headlessui: {
-        prefix: 'Headless'
+    prefix: 'Headless'
     },
   typescript: {
       typeCheck: false
@@ -12,4 +12,13 @@ export default defineNuxtConfig({
     imports: {
       dirs: ['./utils/types']
     },
+  vite: {
+    server: {
+      host: true,
+      port: 3000,
+      watch: {
+        usePolling: true,
+      },
+    },
+  }
 })
