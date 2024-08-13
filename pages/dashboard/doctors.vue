@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { EllipsisVerticalIcon } from "@heroicons/vue/24/outline";
-
 interface Doctor {
   id: string;
   name: string;
@@ -31,11 +28,6 @@ const doctors: Doctor[] = [
   // More doctors...
 ];
 
-const optionsVisible = ref<string | null>(null);
-
-function toggleOptions(id: string) {
-  optionsVisible.value = optionsVisible.value === id ? null : id;
-}
 definePageMeta({
   layout: "dashboard",
 });
@@ -44,8 +36,8 @@ definePageMeta({
   <div class="bg-white">
     <div class="py-16 sm:py-24">
       <!-- PageTitle -->
-      <PageTitle 
-        title="My Doctors" 
+      <PageTitle
+        title="My Doctors"
         description="Manage and view details of your doctors. You can see their specialties and contact information here."
       />
       <!-- /.PageTitle -->
@@ -55,20 +47,20 @@ definePageMeta({
         <div class="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div class="mx-auto max-w-2xl space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
             <div
-            v-for="doctor in doctors"
-            :key="doctor.id"
-            class="border-b border-gray-200 bg-white shadow-sm sm:rounded-lg sm:border"
+              v-for="doctor in doctors"
+              :key="doctor.id"
+              class="border-b border-gray-200 bg-white shadow-sm sm:rounded-lg sm:border"
             >
-            <!-- DoctorInfo -->
-            <DoctorInfo
-              :id="doctor.id" 
-              :name="doctor.name" 
-              :specialty="doctor.specialty" 
-              :contact="doctor.contact" 
-              :contactEmail="doctor.contactEmail" 
-              :imageSrc="doctor.imageSrc" 
-            />
-            <!-- /.DoctorInfo -->
+              <!-- DoctorInfo -->
+              <DoctorInfo
+                :id="doctor.id"
+                :name="doctor.name"
+                :specialty="doctor.specialty"
+                :contact="doctor.contact"
+                :contactEmail="doctor.contactEmail"
+                :imageSrc="doctor.imageSrc"
+              />
+              <!-- /.DoctorInfo -->
             </div>
           </div>
         </div>

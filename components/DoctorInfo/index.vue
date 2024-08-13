@@ -1,12 +1,25 @@
 <script setup lang="ts">
+import { EllipsisVerticalIcon } from "@heroicons/vue/24/outline";
+import { ref, onMounted } from "vue";
+
 const props = defineProps<{
   id: string;
   name: string;
-  photo: string;
+  photo?: string;
   specialty: string;
   contact: string;
   contactEmail: string;
 }>();
+
+const optionsVisible = ref<string | null>(null);
+
+const toggleOptions = (id: string) => {
+  optionsVisible.value = optionsVisible.value === id ? null : id;
+};
+
+onMounted(() => {
+  console.log("DoctorInfo mounted::", props.name);
+});
 </script>
 <template>
   <div
