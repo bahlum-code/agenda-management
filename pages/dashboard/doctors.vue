@@ -45,7 +45,7 @@ definePageMeta({
     <div class="py-16 sm:py-24">
       <!-- PageTitle -->
       <PageTitle 
-        title="Mis doctores" 
+        title="My Doctors" 
         description="Manage and view details of your doctors. You can see their specialties and contact information here."
       />
       <!-- /.PageTitle -->
