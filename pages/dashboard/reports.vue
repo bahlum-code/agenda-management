@@ -24,19 +24,12 @@ definePageMeta({
 <template>
   <div class="bg-white">
     <div class="py-16 sm:py-24">
-      <div class="mx-auto max-w-7xl sm:px-2 lg:px-8">
-        <div class="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
-          <h1
-            class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
-          >
-            Reports
-          </h1>
-          <p class="mt-2 text-sm text-gray-500">
-            View and manage your reports, track patient data, and generate new
-            reports.
-          </p>
-        </div>
-      </div>
+      <!-- PageTitle -->
+      <PageTitle
+        title="Reports"
+        description="View and manage your reports, track patient data, and generate new reports."
+      />
+      <!-- /.PageTitle -->
 
       <div class="mt-16">
         <h2 class="sr-only">Report List</h2>
