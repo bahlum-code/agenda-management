@@ -1,3 +1,18 @@
+<script setup lang="ts">
+const emit = defineEmits<{
+  (e: "search", form: { searchQuery: string }): void;
+}>();
+
+const form = reactive({
+  searchQuery: "",
+});
+
+const onHanldeSubmit = () => {
+  //TODO: Add form validation
+  //TODO: Add form submission  onHanldeSubmit
+  emit("search", form);
+};
+</script>
 <template>
   <!-- Search Section -->
   <section>
@@ -52,6 +67,7 @@
         </p>
         <div class="mt-6">
           <input
+            v-model="form.searchQuery"
             type="text"
             placeholder="Buscar por especialidad, ubicación..."
             class="block w-full px-4 py-2 text-gray-900 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500"

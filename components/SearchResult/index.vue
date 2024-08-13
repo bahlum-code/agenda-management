@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import SearchCard from "../SearchCard/index.vue"
-
 interface Doctor {
   id: number;
   name: string;
@@ -15,46 +12,9 @@ interface Doctor {
   href: string;
 }
 
-const doctors = ref<Doctor[]>([
-  {
-    id: 1,
-    name: "Dr. John Doe",
-    specialty: "Cardiologist",
-    location: "New York, NY",
-    rating: 5,
-    reviewCount: 38,
-    imageSrc: "https://example.com/doctor1.jpg",
-    imageAlt: "Dr. John Doe",
-    fee: "$100",
-    href: "#",
-  },
-  {
-    id: 2,
-    name: "Dr. Jane Smith",
-    specialty: "Dermatologist",
-    location: "Los Angeles, CA",
-    rating: 4,
-    reviewCount: 22,
-    imageSrc: "https://example.com/doctor2.jpg",
-    imageAlt: "Dr. Jane Smith",
-    fee: "$150",
-    href: "#",
-  },
-  {
-    id: 3,
-    name: "Dr. Sarah Johnson",
-    specialty: "Pediatrician",
-    location: "Chicago, IL",
-    rating: 4,
-    reviewCount: 30,
-    imageSrc: "https://example.com/doctor3.jpg",
-    imageAlt: "Dr. Sarah Johnson",
-    fee: "$120",
-    href: "#",
-  },
-  // More doctors...
-]);
-
+defineProps<{
+  doctors: Doctor[];
+}>();
 </script>
 
 <template>
@@ -71,7 +31,7 @@ const doctors = ref<Doctor[]>([
             :key="doctor.id"
             class="bg-white shadow-lg rounded-lg overflow-hidden"
           >
-            <SearchCard :doctor="doctor"></SearchCard>
+            <SearchCard :doctor="doctor" />
           </div>
         </div>
       </div>
