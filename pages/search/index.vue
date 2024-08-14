@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import SearchInput from "../SearchInput"
-import SeachResult from "../SearchResult"
 
 interface Doctor {
   id: number;
@@ -15,13 +13,6 @@ interface Doctor {
   fee: string;
   href: string;
 }
-
-const navigation = [
-  { name: "Services", href: "#" },
-  { name: "Features", href: "#" },
-  { name: "Faq", href: "#" },
-  { name: "Contact", href: "#" },
-];
 
 const searchQuery = ref("");
 const doctors = ref<Doctor[]>([
@@ -74,16 +65,20 @@ const filteredDoctors = computed(() =>
       doctor.location.toLowerCase().includes(searchQuery.value.toLowerCase())
   )
 );
+
+const onSearch = (form: { searchQuery: string }) => {
+  searchQuery.value = form.searchQuery;
+};
 </script>
 
 <template>
   <div class="bg-gray-900 min-h-screen">
-
-    <!-- Search Input -->
-    <SearchInput/>
+    <!-- SearchForm -->
+    <SearchInput @search="onSearch" />
+    <!-- /.SearchForm -->
 
     <!-- Search Results -->
-    <SeachResult/>
+    <SearchResult :doctors="filteredDoctors" />
 
     <!-- Footer -->
     <footer class="relative bg-gray-900">

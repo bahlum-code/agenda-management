@@ -1,7 +1,6 @@
 <script setup lang="ts">
-
-async function handleLoginResponse(response:LoginResponse) {
-  console.log('login-data',response);
+async function handleLoginResponse(response: LoginResponse) {
+  console.log("login-data", response);
 }
 </script>
 <template>
@@ -17,4 +16,3 @@ async function handleLoginResponse(response:LoginResponse) {
     <!--/. form login -->
   </div>
 </template>
-../../utils/auth.js

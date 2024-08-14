@@ -38,19 +38,12 @@ definePageMeta({
 <template>
   <div class="bg-white">
     <div class="py-16 sm:py-24">
-      <div class="mx-auto max-w-7xl sm:px-2 lg:px-8">
-        <div class="mx-auto max-w-2xl px-4 lg:max-w-4xl lg:px-0">
-          <h1
-            class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl"
-          >
-            My Appointments
-          </h1>
-          <p class="mt-2 text-sm text-gray-500">
-            Manage your upcoming appointments, view details, or cancel them as
-            needed.
-          </p>
-        </div>
-      </div>
+      <!-- PageTitle -->
+      <PageTitle
+        title="My Appointments"
+        description="Manage your upcoming appointments, view details, or cancel them as needed."
+      />
+      <!-- /.PageTitle -->
 
       <div class="mt-16">
         <h2 class="sr-only">Upcoming Appointments</h2>
