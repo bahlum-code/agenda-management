@@ -1,17 +1,28 @@
-<script setup>
-import { ref } from "vue";
-import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
+<script setup lang="ts">
 
-const sidebarOpen = ref(false);
+import {
+  Dialog,
+  DialogPanel,
+  TransitionChild,
+  TransitionRoot,
+} from "@headlessui/vue";
 
-const props = defineProps({
-  navigation: Array,
-});
+import { Cog6ToothIcon, XMarkIcon } from "@heroicons/vue/24/outline";
+import { useSidebarStore  } from '~/store/sidebar';
+
+const sidebarStore  = useSidebarStore();
+
+defineProps<{
+  navigation: { name: string; href: string, icon: Component, current: boolean }[];
+}>();
+
+const open = computed(() => sidebarStore.sidebarOpen)
+
 </script>
 <template>
   <div>
-    <TransitionRoot as="template" :show="sidebarOpen">
-      <Dialog class="relative z-50 lg:hidden" @close="sidebarOpen = false">
+    <TransitionRoot as="template" :show="open">
+      <Dialog class="relative z-50 lg:hidden" @close="sidebarStore.toggleSiderbar">
         <TransitionChild
           as="template"
           enter="transition-opacity ease-linear duration-300"
@@ -50,7 +61,7 @@ const props = defineProps({
                   <button
                     type="button"
                     class="-m-2.5 p-2.5"
-                    @click="sidebarOpen = false"
+                    @close="sidebarStore.toggleSiderbar"
                   >
                     <span class="sr-only">Close sidebar</span>
                     <XMarkIcon class="h-6 w-6 text-white" aria-hidden="true" />
@@ -67,7 +78,7 @@ const props = defineProps({
                       class="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                       alt="Your Company"
-                  /></NuxtLink>
+                  ></NuxtLink>
                 </div>
                 <nav class="flex flex-1 flex-col">
                   <ul role="list" class="flex flex-1 flex-col gap-y-7">

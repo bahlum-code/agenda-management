@@ -3,12 +3,14 @@ import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/vue";
 
 import { Bars3Icon, BellIcon } from "@heroicons/vue/24/outline";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/vue/20/solid";
+import { useSidebarStore  } from '~/store/sidebar';
+
+const sidebarStore  = useSidebarStore();
 
 defineProps<{
   userNavigation: { name: string; href: string }[];
 }>();
 
-const sidebarOpen = ref(false);
 </script>
 
 <template>
@@ -19,7 +21,7 @@ const sidebarOpen = ref(false);
       <button
         type="button"
         class="-m-2.5 p-2.5 text-gray-700 lg:hidden"
-        @click="sidebarOpen = true"
+        @click="sidebarStore.toggleSiderbar"
       >
         <span class="sr-only">Open sidebar</span>
         <Bars3Icon class="h-6 w-6" aria-hidden="true" />
