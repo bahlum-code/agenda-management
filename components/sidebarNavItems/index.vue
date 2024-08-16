@@ -1,12 +1,11 @@
-<script setup>
-import { ref } from "vue";
+<script setup lang="ts">
+
 import { Cog6ToothIcon } from "@heroicons/vue/24/outline";
 
-const sidebarOpen = ref(false);
 
-const props = defineProps({
-  navigation: Array,
-});
+defineProps<{
+  navigation: { name: string; href: string, icon: Component, current: boolean }[];
+}>();
 </script>
 <template>
   <div>
@@ -23,7 +22,7 @@ const props = defineProps({
               class="h-8 w-auto"
               src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
               alt="Your Company"
-          /></NuxtLink>
+          ></NuxtLink>
         </div>
         <nav class="flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-7">
