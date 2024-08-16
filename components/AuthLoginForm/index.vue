@@ -1,22 +1,31 @@
 <script setup lang="ts">
+import useVuelidate from "@vuelidate/core";
+import { required, email, minLength } from "@vuelidate/validators";
+
 type LoginProps = {
-  username: string;
+  email: string;
   password: string;
 };
 
-const emit = defineEmits<{
-  (e: "submit", form: LoginProps): void;
-}>();
+const emit = defineEmits<{ (e: "submit-login", form: LoginProps): void }>();
 
 const form = reactive<LoginProps>({
-  username: "",
+  email: "",
   password: "",
 });
+const rules = {
+  email: { required, email },
+  password: { required, minLength: minLength(6) },
+};
+const v$ = useVuelidate(rules, form);
 
 async function handleSubmit() {
-  //TODO: Add form validation
-  //TODO: Add form submission
-  emit("submit", form);
+  v$.value.$validate();
+  v$.value.$touch();
+  if (!v$.value.$invalid) {
+    console.log("enviando datos...");
+    emit("submit-login", form);
+  }
 }
 </script>
 <template>
@@ -31,18 +40,22 @@ async function handleSubmit() {
         <label
           for="email"
           class="block text-sm font-medium leading-6 text-gray-900"
-          >Email address</label
         >
+          Email address
+        </label>
         <div class="mt-2">
           <input
             id="email"
-            v-model="form.username"
+            v-model="form.email"
             name="email"
             type="email"
             autocomplete="email"
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-          <p>this field is required</p>
+          >
+          <p v-if="v$.email.$error" class="text-red-500 text-xs mt-2">
+            <span v-if="!v$.email.required">This field is required</span>
+            <span v-if="v$.email.$error">Please enter a valid email</span>
+          </p>
         </div>
       </div>
 
@@ -51,14 +64,16 @@ async function handleSubmit() {
           <label
             for="password"
             class="block text-sm font-medium leading-6 text-gray-900"
-            >Password</label
           >
+            Password
+          </label>
           <div class="text-sm">
             <NuxtLink
               to="/auth/forgot-password"
               class="font-semibold text-indigo-600 hover:text-indigo-500"
-              >Forgot password?</NuxtLink
             >
+              Forgot password?
+            </NuxtLink>
           </div>
         </div>
         <div class="mt-2">
@@ -68,9 +83,14 @@ async function handleSubmit() {
             name="password"
             type="password"
             autocomplete="current-password"
-            required
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
+          >
+          <p v-if="v$.password.$error" class="text-red-500 text-xs mt-2">
+            <span v-if="!v$.password.required">This field is required</span>
+            <span v-if="v$.password.$error">
+              Password must be at least 6 characters long
+            </span>
+          </p>
         </div>
       </div>
 
@@ -81,6 +101,9 @@ async function handleSubmit() {
         >
           Sign in
         </button>
+        <p v-if="v$.$error" class="text-red-500 text-sm mt-2 text-center">
+          Please correct the errors before submitting.
+        </p>
       </div>
     </form>
 
@@ -90,8 +113,9 @@ async function handleSubmit() {
       <a
         href="#"
         class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-        >Start a 14 day free trial</a
       >
+        Start a 14 day free trial
+      </a>
     </p>
   </div>
 </template>

@@ -1,21 +1,34 @@
 <script setup lang="ts">
-const emit = defineEmits(["reset-password"]);
-const newPassword = ref();
-const confirmPassword = ref();
+import useVuelidate from '@vuelidate/core';
+import {required, sameAs, minLength}from "@vuelidate/validators"
 
-async function handleSubmit() {
-  try {
-    const response = await fetch('/api/reset-password', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ newPassword: newPassword.value, confirmPassword: confirmPassword.value })
-    });
-    const data = await response.json()
-    emit('reset-password', { status:"ok", data})
-    
-  } catch (error) {
-    emit('reset-password',{ status:"fail", error})
+type resetProps ={
+  newPassword: string
+  confirmPassword:string
+}
+const emit = defineEmits<{(e:'reset-password',form:resetProps):void}>()
+
+const form = reactive<resetProps>({
+  newPassword:"",
+  confirmPassword:""
+})
+
+const rules = computed(()=>{
+  return{
+    newPassword:{required,minLength:minLength(6)},
+    confirmPassword:{required,sameAsNewPassword:sameAs(form.newPassword)}
   }
+})
+const v$ = useVuelidate(rules, form)
+
+const handleSubmit=()=>{
+  v$.value.$validate()
+  v$.value.$touch()
+  if(!v$.value.$error){
+    console.log('correcto-enviando datos...');
+    emit('reset-password',form) 
+  }
+
 }
 </script>
 <template>
@@ -28,39 +41,44 @@ async function handleSubmit() {
     >
       <div>
         <label
-          for="password"
+          for="newPassword"
           class="block text-sm font-medium leading-6 text-gray-900"
           >New Password</label
         >
         <div class="mt-2">
           <input
-            id="password"
-            v-model="newPassword"
-            name="password"
+            id="newPassword"
+            v-model="form.newPassword"
+            name="newPassword"
             type="password"
-            autocomplete="new-password"
-            required
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            @input="v$.newPassword.$touch"
           >
         </div>
+
+        <div v-if="v$.newPassword.$error" class="text-red-500 text-xs mt-2">
+          <p v-if="v$.newPassword.minLength.$invalid">Password must be at least 6 characters long</p>
+        </div>
+   
       </div>
 
       <div>
         <label
-          for="password-confirm"
+          for="confirmPassword"
           class="block text-sm font-medium leading-6 text-gray-900"
           >Confirm Password</label
         >
         <div class="mt-2">
           <input
-            id="password-confirm"
-            v-model="confirmPassword"
-            name="password-confirm"
+            id="confirmPassword"
+            v-model="form.confirmPassword"
+            name="confirmPassword"
             type="password"
-            autocomplete="new-password"
-            required
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           >
+        </div>
+        <div v-if="v$.confirmPassword.$error" class="text-red-500 text-xs mt-2">
+          <p v-if="v$.confirmPassword.sameAsNewPassword.$invalid">Passwords must match</p>
         </div>
       </div>
 

@@ -1,38 +1,13 @@
  export interface LoginResponse {
-    success: string;
-    data?: {
-      token: string;
-      user: {
-        id: number;
-        username: string;
-        email: string;
-      };
-    };
-    error?: string;
+    email:string,
+    password:string
   }
-
   export interface resetPasswordResponse {
-    success: string;
-    data?: {
-      token: string;
-      user: {
-        id: number;
-        username: string;
-        email: string;
-      };
-    };
-    error?: string;
+    newPassword:string,
+    confirmPassword:string
   }
   export interface forgotPasswordResponse {
-    success: string;
-    data?: {
-      token: string;
-      user: {
-        id: number;
-        username: string;
         email: string;
       };
-    };
-    error?: string;
-  }
+
  

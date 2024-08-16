@@ -1,18 +1,26 @@
 <script setup lang="ts">
-const emit = defineEmits(["forgot-password"]);
-const email = ref();
+import useVuelidate from "@vuelidate/core";
+import { required, email } from "@vuelidate/validators";
+
+type forgotProps = {
+  email:string
+}
+const emit = defineEmits<{(e:'forgot-password', form:forgotProps):void}>()
+
+const form = reactive({
+  email:""
+})
+const rules = {
+  email:{ required,email}
+}
+const v$ = useVuelidate(rules,form)
 
 async function handleForgotPassword() {
-  try {
-    const response = await fetch("/api/forgot-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email: email.value }),
-    });
-    const data = response.json();
-    emit("forgot-password", { success: "ok", data: data });
-  } catch (error) {
-    emit("forgot-password", { succes: "fail", error });
+  v$.value.$validate()
+  v$.value.$touch()
+  if(!v$.value.$invalid){
+    console.log('enviando datos...');
+    emit('forgot-password',form)
   }
 }
 </script>
@@ -35,13 +43,16 @@ async function handleForgotPassword() {
         <div class="mt-2">
           <input
             id="email"
-            v-model="email"
+            v-model="form.email"
             name="email"
             type="email"
             autocomplete="email"
-            required
             class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            @input="v$.email.$touch"
           >
+        </div>
+        <div v-if="v$.email.$error" class="text-red-500 text-xs mt-2">
+          <p v-if="v$.email.$error">Formato no valido</p>
         </div>
       </div>
 
