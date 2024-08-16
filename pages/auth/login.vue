@@ -1,6 +1,6 @@
 <script setup lang="ts">
 async function handleLoginResponse(response: LoginResponse) {
-  console.log("login-data", response);
+  console.log("datos desde el hijo", response);
 }
 </script>
 <template>
@@ -12,7 +12,7 @@ async function handleLoginResponse(response: LoginResponse) {
     <!--/. header login  -->
 
     <!-- form login -->
-    <AuthLoginForm @login-response="handleLoginResponse" />
+    <AuthLoginForm @submit-login="handleLoginResponse" />
     <!--/. form login -->
   </div>
 </template>
