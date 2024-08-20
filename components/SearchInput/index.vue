@@ -1,18 +1,40 @@
 <script setup lang="ts">
-const emit = defineEmits<{
-  (e: "search", form: { searchQuery: string }): void;
-}>();
+import useVuelidate from "@vuelidate/core";
+import { minLength } from "@vuelidate/validators";
 
-const form = reactive({
+type SearchFormProps = {
+  searchQuery: string;
+};
+
+const props = defineProps<{ doctorsCount: number }>();
+
+const emit = defineEmits<{ (e: "search", form: SearchFormProps): void }>();
+
+const noDoctorsFound = () => {
+  return props.doctorsCount > 0;
+};
+
+const form = reactive<SearchFormProps>({
   searchQuery: "",
 });
 
-const onHanldeSubmit = () => {
-  //TODO: Add form validation
-  //TODO: Add form submission  onHanldeSubmit
-  emit("search", form);
+const rules = computed(() => ({
+  searchQuery: { minLength: minLength(3), noDoctorsFound },
+}));
+
+const v$ = useVuelidate(rules, form);
+
+const handleSubmit = () => {
+  v$.value.$validate();
+  v$.value.$touch();
+
+  if (!v$.value.$error) {
+    console.log("Formulario válido, enviando datos...");
+    emit("search", form);
+  }
 };
 </script>
+
 <template>
   <!-- Search Section -->
   <section>
@@ -66,17 +88,30 @@ const onHanldeSubmit = () => {
           y especialistas según tus necesidades.
         </p>
         <div class="mt-6">
-          <input
-            v-model="form.searchQuery"
-            type="text"
-            placeholder="Buscar por especialidad, ubicación..."
-            class="block w-full px-4 py-2 text-gray-900 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500"
-          />
-          <button
-            class="mt-4 inline-block px-6 py-3 text-sm font-semibold text-white bg-indigo-500 rounded-md shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Buscar
-          </button>
+          <form @submit.prevent="handleSubmit">
+            <input
+              v-model="form.searchQuery"
+              type="text"
+              placeholder="Buscar por especialidad, ubicación..."
+              @input="v$.searchQuery.$touch"
+              :class="{ 'border-red-500': v$.searchQuery.$error }"
+              class="block w-full px-4 py-2 text-gray-900 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500"
+            />
+            <div v-if="v$.searchQuery.$error" class="text-red-500 text-xs mt-2">
+              <p v-if="v$.searchQuery.minLength.$invalid">
+                Debe tener al menos 3 caracteres.
+              </p>
+              <p v-if="v$.searchQuery.noDoctorsFound.$invalid">
+                No se encontraron doctores.
+              </p>
+            </div>
+            <button
+              type="submit"
+              class="mt-4 inline-block px-6 py-3 text-sm font-semibold text-white bg-indigo-500 rounded-md shadow-sm hover:bg-indigo-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+            >
+              Buscar
+            </button>
+          </form>
         </div>
       </div>
     </div>

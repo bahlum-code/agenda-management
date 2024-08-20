@@ -73,16 +73,11 @@ const onSearch = (form: { searchQuery: string }) => {
 
 <template>
   <div class="bg-gray-900 min-h-screen">
+     <!-- Header -->
+    <LandingHeader/>
     <!-- SearchForm -->
-    <SearchInput @search="onSearch" />
-    <!-- /.SearchForm -->
-
+    <SearchInput @search="onSearch" :doctorsCount="filteredDoctors.length" />
     <!-- Search Results -->
     <SearchResult :doctors="filteredDoctors" />
-
-    <!-- Footer -->
-    <footer class="relative bg-gray-900">
-      <!-- Include your footer code here -->
-    </footer>
   </div>
 </template>
