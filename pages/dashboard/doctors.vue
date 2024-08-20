@@ -8,10 +8,6 @@ const { getDoctors } = storeToRefs(doctorStore);
 
 onMounted(() => {
   doctorStore.fetcAllhDoctors();
-
-  setTimeout(() => {
-    console.log("Doctors fetched:", getDoctors.value);
-  }, 1000);
 });
 
 definePageMeta({
@@ -40,11 +36,10 @@ definePageMeta({
               <!-- DoctorInfo -->
               <DoctorInfo
                 :id="doctor.id"
-                :name="doctor.name"
+                :name="doctor.firstName"
                 :specialty="doctor.specialty"
-                :contact="doctor.contact"
-                :contactEmail="doctor.contactEmail"
-                :imageSrc="doctor.imageSrc"
+                :contact="doctor.phoneNumber"
+                :contactEmail="doctor.email"
               />
               <!-- /.DoctorInfo -->
             </div>
