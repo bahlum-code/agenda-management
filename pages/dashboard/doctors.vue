@@ -5,9 +5,10 @@ import { storeToRefs } from "pinia";
 const doctorStore = useDoctorsStore();
 
 const { getDoctors } = storeToRefs(doctorStore);
+const { fetcAllhDoctors } = doctorStore;
 
 onMounted(() => {
-  doctorStore.fetcAllhDoctors();
+  fetcAllhDoctors();
 });
 
 definePageMeta({
