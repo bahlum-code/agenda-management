@@ -1,32 +1,18 @@
 <script setup lang="ts">
-interface Doctor {
-  id: string;
-  name: string;
-  specialty: string;
-  contact: string;
-  contactEmail: string;
-  imageSrc: string;
-}
+import { useDoctorsStore } from "~/store/doctors";
+import { storeToRefs } from "pinia";
 
-const doctors: Doctor[] = [
-  {
-    id: "DOC001",
-    name: "Dr. John Smith",
-    specialty: "Cardiologist",
-    contact: "555-1234",
-    contactEmail: "john.smith@example.com",
-    imageSrc: "",
-  },
-  {
-    id: "DOC002",
-    name: "Dr. Emily Johnson",
-    specialty: "Dermatologist",
-    contact: "555-5678",
-    contactEmail: "emily.johnson@example.com",
-    imageSrc: "",
-  },
-  // More doctors...
-];
+const doctorStore = useDoctorsStore();
+
+const { getDoctors } = storeToRefs(doctorStore);
+
+onMounted(() => {
+  doctorStore.fetcAllhDoctors();
+
+  setTimeout(() => {
+    console.log("Doctors fetched:", getDoctors.value);
+  }, 1000);
+});
 
 definePageMeta({
   layout: "dashboard",
@@ -47,7 +33,7 @@ definePageMeta({
         <div class="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div class="mx-auto max-w-2xl space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
             <div
-              v-for="doctor in doctors"
+              v-for="doctor in getDoctors"
               :key="doctor.id"
               class="border-b border-gray-200 bg-white shadow-sm sm:rounded-lg sm:border"
             >
