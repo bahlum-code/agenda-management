@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { EllipsisVerticalIcon } from "@heroicons/vue/24/outline";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 
-const props = defineProps<{
-  id: string;
+defineProps<{
+  id: number;
   name: string;
   photo?: string;
   specialty: string;
@@ -11,15 +11,11 @@ const props = defineProps<{
   contactEmail: string;
 }>();
 
-const optionsVisible = ref<string | null>(null);
+const optionsVisible = ref<number | null>(null);
 
-const toggleOptions = (id: string) => {
+const toggleOptions = (id: number) => {
   optionsVisible.value = optionsVisible.value === id ? null : id;
 };
-
-onMounted(() => {
-  console.log("DoctorInfo mounted::", props.name);
-});
 </script>
 <template>
   <div
@@ -69,13 +65,15 @@ onMounted(() => {
             <a
               :href="'/doctors/' + id"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >View Details</a
             >
+              View Details
+            </a>
             <a
               :href="'mailto:' + contactEmail"
               class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              >Contact</a
             >
+              Contact
+            </a>
           </div>
         </div>
       </transition>
