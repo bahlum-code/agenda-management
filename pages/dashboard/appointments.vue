@@ -16,13 +16,6 @@ onMounted(() => {
   }, 1000);
 });
 
-interface Appointment {
-  id: string;
-  dateTime: string;
-  dateTimeFormatted: string;
-  date: string;
-  doctor: string;
-}
 
 
 const optionsVisible = ref<string | null>(null);
