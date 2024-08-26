@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { type User as Doctor } from "@/utils/types/user";
+//import { type User as Doctor } from "@/utils/types/user";
+import { type Specialty } from "@/utils/types/specialty.js";
 //import { useRuntimeConfig } from "#app";
 
 //TODO: search for a better way to handle this, Jonthan
@@ -8,24 +9,25 @@ import { type User as Doctor } from "@/utils/types/user";
 
 
 
-export const useDoctorsStore = defineStore("doctors", {
+export const useSpecialtyStore = defineStore("specialty", {
   state: () => ({ 
     apiUrl:'',
-    doctors: [] as Doctor[]
+    specialties: [] as Specialty[]
    }),
   getters: {
-    getDoctors(state) {
-      return state.doctors;
+    getEspecialties(state) {
+      return state.specialties;
     },
   },
   actions: {
-    async fetcAllhDoctors() {
+    async fetchAllSpecialities() {
       const config = useRuntimeConfig()    
       return axios
-        .get(`${config.public.apiUrl}/doctors`)
+        .get(`${config.public.apiUrl}/specialties`)
         .then((response) => {
-          this.doctors = response.data;
-
+          this.specialties = response.data;
+          console.log("response", response.data);
+          
           return response.data;
         })
         .catch((error) => {
