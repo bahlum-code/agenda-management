@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/eslint-module', "@nuxt/eslint", 'nuxt-headlessui', '@pinia/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/eslint-module', "@nuxt/eslint", 'nuxt-headlessui', '@pinia/nuxt', '@nuxt/test-utils/module'],
   pinia: {
     autoImports: ['defineStore'],
   },
