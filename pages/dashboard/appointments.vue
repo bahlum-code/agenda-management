@@ -1,25 +1,22 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { EllipsisVerticalIcon } from "@heroicons/vue/24/outline";
+import { useAppointmentStore } from "~/store/appoinments";
+import { storeToRefs } from "pinia";
 
-interface Appointment {
-  id: string;
-  dateTime: string;
-  dateTimeFormatted: string;
-  date: string;
-  doctor: string;
-}
+const appointmentStore = useAppointmentStore();
 
-const appointments: Appointment[] = [
-  {
-    id: "APT123456",
-    dateTime: "2024-08-10T14:00:00Z",
-    dateTimeFormatted: "August 10, 2024 at 2:00 PM",
-    date: "August 10, 2024",
-    doctor: "Dr. Jane Doe",
-  },
-  // More appointments...
-];
+const { getAppointments } = storeToRefs(appointmentStore);
+
+onMounted(() => {
+  appointmentStore.fetchAllAppointments();
+
+  setTimeout(() => {
+    console.log("Appointments fetched:", getAppointments.value);
+  }, 1000);
+});
+
+
 
 const optionsVisible = ref<string | null>(null);
 
@@ -50,7 +47,7 @@ definePageMeta({
         <div class="mx-auto max-w-7xl sm:px-2 lg:px-8">
           <div class="mx-auto max-w-2xl space-y-8 sm:px-4 lg:max-w-4xl lg:px-0">
             <div
-              v-for="appointment in appointments"
+              v-for="appointment in getAppointments"
               :key="appointment.id"
               class="border-b border-gray-200 bg-white shadow-sm sm:rounded-lg sm:border"
             >
@@ -75,13 +72,13 @@ definePageMeta({
                     <dt class="font-medium text-gray-900">Date & Time</dt>
                     <dd class="mt-1 text-gray-500">
                       <time :datetime="appointment.dateTime">{{
-                        appointment.dateTimeFormatted
+                        appointment.appointmentDate
                       }}</time>
                     </dd>
                   </div>
                   <div>
                     <dt class="font-medium text-gray-900">Doctor</dt>
-                    <dd class="mt-1 text-gray-500">{{ appointment.doctor }}</dd>
+                    <dd class="mt-1 text-gray-500">{{ appointment.doctorId }}</dd>
                   </div>
                 </dl>
 
