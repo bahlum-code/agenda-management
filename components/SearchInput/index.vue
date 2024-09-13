@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import useVuelidate from "@vuelidate/core";
 import { minLength } from "@vuelidate/validators";
+import { watchEffect } from "vue";
+import { useSearchStore } from '~/store/searchStore';
+import { storeToRefs } from "pinia";
+const searchStore = useSearchStore();
+
+watchEffect(() => {
+  searchStore.searchDoctors(searchStore.query)
+})
 
 type SearchFormProps = {
   searchQuery: string;
@@ -90,7 +98,7 @@ const handleSubmit = () => {
         <div class="mt-6">
           <form @submit.prevent="handleSubmit">
             <input
-              v-model="form.searchQuery"
+              v-model="searchStore.query"
               type="text"
               placeholder="Buscar por especialidad, ubicación..."
               @input="v$.searchQuery.$touch"
