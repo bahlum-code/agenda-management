@@ -40,8 +40,16 @@ const emit = defineEmits(['close'])
 const closeModal = () => {
   emit('close')
 }
-</script>
 
-<style scoped>
-/* Personaliza los estilos según sea necesario */
-</style>
+function convertirHora(hora24) {
+  // Dividir la hora en partes (horas, minutos, segundos)
+  const [hora, minutos] = hora24.split(':');
+
+  // Convertir la hora a formato 12 horas
+  const hora12 = hora % 12 || 12;  // Si hora es 0 o 12, mostrar 12 en lugar de 0
+  const periodo = hora < 12 ? 'AM' : 'PM';
+
+  // Retornar la hora en formato 12 horas con AM/PM
+  return `${hora12}:${minutos} ${periodo}`;
+}
+</script>
