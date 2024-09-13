@@ -6,20 +6,14 @@ type SearchFormProps = {
   searchQuery: string;
 };
 
-const props = defineProps<{ doctorsCount: number }>();
-
 const emit = defineEmits<{ (e: "search", form: SearchFormProps): void }>();
-
-const noDoctorsFound = () => {
-  return props.doctorsCount > 0;
-};
 
 const form = reactive<SearchFormProps>({
   searchQuery: "",
 });
 
 const rules = computed(() => ({
-  searchQuery: { minLength: minLength(3), noDoctorsFound },
+  searchQuery: { minLength: minLength(1) },
 }));
 
 const v$ = useVuelidate(rules, form);
@@ -29,8 +23,16 @@ const handleSubmit = () => {
   v$.value.$touch();
 
   if (!v$.value.$error) {
-    console.log("Formulario válido, enviando datos...");
     emit("search", form);
+
+    scrollDown();
+  }
+};
+
+const scrollDown = () => {
+  const section = document.getElementById("search-results");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
   }
 };
 </script>
@@ -91,18 +93,15 @@ const handleSubmit = () => {
           <form @submit.prevent="handleSubmit">
             <input
               v-model="form.searchQuery"
+              class="block w-full px-4 py-2 text-gray-900 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500"
+              :class="{ 'border-red-500': v$.searchQuery.$error }"
               type="text"
               placeholder="Buscar por especialidad, ubicación..."
               @input="v$.searchQuery.$touch"
-              :class="{ 'border-red-500': v$.searchQuery.$error }"
-              class="block w-full px-4 py-2 text-gray-900 rounded-md shadow-sm focus:ring-2 focus:ring-indigo-500"
             />
             <div v-if="v$.searchQuery.$error" class="text-red-500 text-xs mt-2">
               <p v-if="v$.searchQuery.minLength.$invalid">
                 Debe tener al menos 3 caracteres.
-              </p>
-              <p v-if="v$.searchQuery.noDoctorsFound.$invalid">
-                No se encontraron doctores.
               </p>
             </div>
             <button
