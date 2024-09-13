@@ -1,43 +1,40 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import { defineProps } from "vue";
 
-interface Doctor {
-  id: number;
-  name: string;
-  specialty: string;
-  location: string;
-  rating: number;
-  reviewCount: number;
-  imageSrc: string;
-  imageAlt: string;
-  fee: string;
-  href: string;
-}
+import { type DoctorSearch } from "@/utils/types/doctor-search";
 
 const props = defineProps<{
-  doctor: Doctor;
+  doctor: DoctorSearch;
+  setIsOpen: (value: boolean) => void;
+  setSelectedDoctor: (doctor: DoctorSearch) => void;
 }>();
+
+const openDialog = () => {
+  props.setSelectedDoctor(props.doctor);
+  props.setIsOpen(true);
+};
+
+const getRandomImage = () => {
+  const randomImage = Math.floor(Math.random() * 100) + 1;
+
+  return `https://picsum.photos/id/${randomImage}/300/300`;
+};
 </script>
 
 <template>
   <div>
     <img
-      :src="doctor.imageSrc"
-      :alt="doctor.imageAlt"
+      :src="getRandomImage()"
+      alt="default doctor image"
       class="w-full h-48 object-cover"
     />
     <div class="p-6">
       <h3 class="text-xl font-semibold text-gray-900">
-        {{ doctor.name }}
+        {{ props.doctor.firstName }} {{ props.doctor.lastName }}
       </h3>
       <p class="mt-2 text-gray-600">{{ doctor.specialty }}</p>
-      <p class="mt-2 text-gray-600">{{ doctor.location }}</p>
-      <p class="mt-2 text-gray-600">Rating: {{ doctor.rating }} ({{ doctor.reviewCount }} reviews)</p>
-      <p class="mt-2 text-gray-600">Fee: {{ doctor.fee }}</p>
-      <a
-        :href="doctor.href"
-        class="block mt-4 text-indigo-500 hover:underline"
-      >
+
+      <a @click="openDialog" class="block mt-4 text-indigo-500 hover:underline">
         Ver más detalles
       </a>
     </div>
